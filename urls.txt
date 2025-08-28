@@ -1,0 +1,16 @@
+
+https://www.apple.com/newsroom/2025/07/apple-reports-third-quarter-results/
+https://www.apple.com/newsroom/rss-feed.rss
+https://finance.yahoo.com/rss/headline?s=AAPL
+https://finance.yahoo.com/rss/headline?s=TSLA
+https://www.prnewswire.com/rss/financial-services-latest-news.rss
+https://www.prnewswire.com/rss/technology-latest-news.rss
+https://www.prnewswire.com/rss/energy-latest-news.rss
+https://feeds.bloomberg.com/markets/news.rss
+https://feeds.bloomberg.com/technology/news.rss
+https://www.cnbc.com/id/10001147/device/rss/rss.html
+https://www.cnbc.com/id/100003114/device/rss/rss.html
+https://feeds.finance.yahoo.com/rss/2.0/headline?s=^GSPC&region=US&lang=en-US
+https://feeds.finance.yahoo.com/rss/2.0/headline?s=yhoo&region=US&lang=en-US
+https://feeds.bloomberg.com/technology/news.rss
+https://feeds.bloomberg.com/markets/news.rss
