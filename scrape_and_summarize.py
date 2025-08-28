@@ -187,7 +187,7 @@ def main():
         html_body += f"<li>{summary}</li><br>"
     html_body += "</ol>"
 
-    recipient = "egundebitolu23@gmail.com"  # REAL EMAIL
+    recipient = os.getenv("EMAIL_RECIPIENT")  # REAL EMAIL
     print(f"\n📧 Sending email digest to {recipient} ...")
     send_email(subject, html_body, recipient, is_html=True)
 
