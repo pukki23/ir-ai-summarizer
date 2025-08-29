@@ -1,28 +1,31 @@
-name: Daily Summarizer
+name: Run IR AI Summarizer
+
 on:
   schedule:
-    - cron: "0 8 * * *"   # runs daily at 8 AM UTC
-  workflow_dispatch:
+    # Runs every day at 8am UTC (adjust cron as needed)
+    - cron: "0 8 * * *"
+  workflow_dispatch:   # allows manual runs from GitHub UI
 
 jobs:
-  run:
+  run-summarizer:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      - name: Setup Python
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
-      - name: Install deps
-        run: pip install -r requirements.txt
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
       - name: Run summarizer
         env:
-          HUGGINGFACE_TOKEN: ${{ secrets.HUGGINGFACE_TOKEN }}
-          EMAIL_USER: ${{ secrets.EMAIL_USER }}
-          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
-          EMAIL_RECIPIENT: ${{ secrets.EMAIL_RECIPIENT }}
-        run: python scrape_and_summarize.py
-      - uses: actions/upload-artifact@v3
-        with:
-          name: summaries
-          path: outputs/
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          python main.py
