@@ -10,6 +10,9 @@ load_dotenv()
 EMAIL_ADDRESS = os.getenv("EMAIL_ADDRESS")
 EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
 
+print("EMAIL_ADDRESS:", EMAIL_ADDRESS)
+print("EMAIL_PASSWORD is set:", EMAIL_PASSWORD is not None)
+
 def send_email(subject, body, recipient, is_html=False):
     if not EMAIL_ADDRESS or not EMAIL_PASSWORD:
         raise ValueError("❌ Missing EMAIL_ADDRESS or EMAIL_PASSWORD")
