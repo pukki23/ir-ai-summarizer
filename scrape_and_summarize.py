@@ -13,11 +13,11 @@ from email_utils import send_email
 # Force it to load from current dir
 from pathlib import Path
 
-env_path = Path(".") / ".env"   # look in the current working directory
-print("Looking for .env at:", env_path)
-
-load_dotenv(dotenv_path=env_path, override=True) #Overides the saved env varibles
-
+# Only load .env if it exists (local dev)
+env_path = Path(".") / ".env"
+if env_path.exists():
+    load_dotenv(dotenv_path=env_path, override=True)
+    
 HUGGINGFACE_TOKEN = os.getenv("HUGGINGFACE_TOKEN")
 print(HUGGINGFACE_TOKEN)
 MODEL_ID = os.getenv("MODEL_ID", "facebook/bart-large-cnn") #("MODEL_ID")#, "facebook/bart-large-cnn")
