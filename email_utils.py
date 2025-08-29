@@ -4,20 +4,16 @@ from email.mime.multipart import MIMEMultipart
 import os
 from dotenv import load_dotenv
 
-# Force it to load from current dir
-from pathlib import Path
+# Load .env if present (for local dev)
+load_dotenv()
 
-env_path = Path(".") / ".env"   # look in the current working directory
-print("Looking for .env at:", env_path)
-
-load_dotenv(override=True) #Overides the saved env varibles
-load_dotenv(dotenv_path=env_path)
-
-EMAIL_USER = os.getenv("EMAIL_USER")
-EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
 EMAIL_ADDRESS = os.getenv("EMAIL_ADDRESS")
+EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
 
 def send_email(subject, body, recipient, is_html=False):
+    if not EMAIL_ADDRESS or not EMAIL_PASSWORD:
+        raise ValueError("❌ Missing EMAIL_ADDRESS or EMAIL_PASSWORD")
+
     msg = MIMEMultipart()
     msg["From"] = EMAIL_ADDRESS
     msg["To"] = recipient
