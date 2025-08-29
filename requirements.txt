@@ -4,3 +4,4 @@ python-dotenv
 selenium 
 feedparser
 load_dotenv
+lxml
