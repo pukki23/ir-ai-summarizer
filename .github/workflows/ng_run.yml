@@ -42,4 +42,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: investing-summary
-          path: outputs/*.md
+          path: ng-outputs/*.md
