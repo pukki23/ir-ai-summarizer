@@ -1,0 +1,3 @@
+https://ng.investing.com/rss/analysis.rss
+https://ng.investing.com/rss/market-overview.rss
+https://ng.investing.com/rss/forex.rss
