@@ -94,7 +94,7 @@ def main():
         all_summaries.extend(summaries)
 
     # Save results
-    out_file = f"outputs/investing_summary_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md"
+    out_file = f"ng-outputs/investing_summary_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md"
     os.makedirs("ng-outputs", exist_ok=True)
     with open(out_file, "w", encoding="utf-8") as f:
         f.write("\n\n---\n\n".join(all_summaries))
