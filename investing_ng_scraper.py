@@ -4,6 +4,8 @@ from bs4 import BeautifulSoup
 import feedparser
 from dotenv import load_dotenv
 from datetime import datetime
+import time
+from email_utils import send_email
 
 # Force it to load from current dir
 from pathlib import Path
@@ -98,6 +100,19 @@ def main():
         f.write("\n\n---\n\n".join(all_summaries))
 
     print(f"\n✅ Investing.com summaries saved to {out_file}")
+
+    # === EMAIL DIGEST ===
+    subject = "Daily NG News"
+
+    # Wrap in HTML list
+    html_body = "<h2>Daily NG News Digest</h2><ol>"
+    for summary in all_summaries:
+        html_body += f"<li>{summary}</li><br>"
+    html_body += "</ol>"
+
+    recipient = os.getenv("EMAIL_RECIPIENT")  # REAL EMAIL
+    print(f"\n📧 Sending email digest to {recipient} ...")
+    send_email(subject, html_body, recipient, is_html=True)
 
 
 if __name__ == "__main__":
