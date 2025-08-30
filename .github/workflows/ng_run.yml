@@ -37,3 +37,9 @@ jobs:
           EMAIL_RECIPIENT: ${{ secrets.EMAIL_RECIPIENT }}
         run: |
           python investing_ng_scraper.py
+
+      - name: Upload summary file as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: investing-summary
+          path: outputs/*.md
