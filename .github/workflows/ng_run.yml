@@ -39,7 +39,7 @@ jobs:
           python investing_ng_scraper.py
 
       - name: Upload summary file as artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: investing-summary
           path: ng-outputs/*.md
