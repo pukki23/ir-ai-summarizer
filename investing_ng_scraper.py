@@ -5,11 +5,17 @@ import feedparser
 from dotenv import load_dotenv
 from datetime import datetime
 
-# Load .env if present
-load_dotenv()
+# Force it to load from current dir
+from pathlib import Path
+
+# Only load .env if it exists (local dev)
+env_path = Path(".") / ".env"
+if env_path.exists():
+    load_dotenv(dotenv_path=env_path, override=True)
 
 HUGGINGFACE_TOKEN = os.getenv("HUGGINGFACE_TOKEN")
 MODEL_ID = os.getenv("MODEL_ID", "facebook/bart-large-cnn")
+MAX_ARTICLES_PER_FEED = int(os.getenv("MAX_ARTICLES_PER_FEED", 5))  # default 5
 
 HEADERS = {"Authorization": f"Bearer {HUGGINGFACE_TOKEN}"}
 
@@ -47,7 +53,7 @@ def clean_investing_article(url):
 
 
 def scrape_investing_rss(feed_url, max_articles=5):
-    """Parse investing.com RSS feed and summarize articles."""
+    #Parse investing.com RSS feed and summarize articles
     feed = feedparser.parse(feed_url)
     summaries = []
 
@@ -68,10 +74,22 @@ def scrape_investing_rss(feed_url, max_articles=5):
 
 
 def main():
-    # Example: Nigerian Investing.com analysis RSS
-    rss_url = "https://ng.investing.com/rss/analysis.rss"
+    # Load Investing.com RSS URLs from text file
+    urls_file = "investing_urls.txt"
+    if not os.path.exists(urls_file):
+        print(f"[ERROR] File {urls_file} does not exist!")
+        return
 
-    all_summaries = scrape_investing_rss(rss_url)
+    with open(urls_file, "r", encoding="utf-8-sig") as f:
+        urls = [line.strip() for line in f if line.strip()]
+
+    all_summaries = []
+
+    # Loop through all URLs
+    for url in urls:
+        print(f"Processing {url}")
+        summaries = scrape_investing_rss(url)
+        all_summaries.extend(summaries)
 
     # Save results
     out_file = f"outputs/investing_summary_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md"
