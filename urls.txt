@@ -1,5 +1,3 @@
-https://www.apple.com/newsroom/rss-feed.rss
-https://finance.yahoo.com/rss/headline?s=AAPL
 https://www.prnewswire.com/rss/financial-services-latest-news.rss
 https://www.prnewswire.com/rss/technology-latest-news.rss
 https://www.prnewswire.com/rss/energy-latest-news.rss
